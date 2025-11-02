@@ -141,7 +141,7 @@ export default function FAQ() {
           transition={{ delay: 1 }}
         >
           <p className="text-gray-600 mb-6">
-            Still have questions? We're here to help!
+            Still have questions? We&apos;re here to help!
           </p>
           <button className="px-8 py-4 bg-primary-500 text-white rounded-full font-semibold hover:bg-primary-600 transition-all hover:scale-105 shadow-lg">
             Contact Support

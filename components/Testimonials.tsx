@@ -111,7 +111,7 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <div className="text-6xl text-primary-200 mb-4">"</div>
+              <div className="text-6xl text-primary-200 mb-4">&quot;</div>
               <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8">
                 {testimonials[currentIndex].quote}
               </p>

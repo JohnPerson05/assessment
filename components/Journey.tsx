@@ -64,7 +64,7 @@ export default function Journey() {
             Journey with <span className="text-primary-500">ATS</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From setup to success, we're with you every step of the way
+            From setup to success, we&apos;re with you every step of the way
           </p>
         </motion.div>
 

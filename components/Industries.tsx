@@ -93,7 +93,7 @@ export default function Industries() {
             <span className="text-primary-400">Multiple Sectors</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Our ATS platform adapts to your industry's unique hiring needs
+            Our ATS platform adapts to your industry&apos;s unique hiring needs
           </p>
         </motion.div>
 
@@ -144,7 +144,7 @@ export default function Industries() {
           transition={{ delay: 0.8 }}
         >
           <p className="text-gray-300 mb-6">
-            Don't see your industry? We customize solutions for all sectors.
+            Don&apos;t see your industry? We customize solutions for all sectors.
           </p>
           <button className="px-8 py-4 bg-white text-dark-900 rounded-full font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
             Talk to Our Experts

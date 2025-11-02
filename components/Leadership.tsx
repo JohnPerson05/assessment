@@ -141,7 +141,7 @@ export default function Leadership() {
             Join Our Growing Team
           </h3>
           <p className="text-white/90 mb-6 text-lg">
-            We're always looking for talented individuals who share our passion
+            We&apos;re always looking for talented individuals who share our passion
           </p>
           <button className="px-8 py-4 bg-white text-primary-600 rounded-full font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
             View Open Positions
