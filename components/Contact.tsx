@@ -77,7 +77,7 @@ export default function Contact() {
             Get in Touch
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold text-dark-900 mb-6">
-            Let's Start Your{' '}
+            Let&apos;s Start Your{' '}
             <span className="text-primary-500">Success Story</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -198,7 +198,7 @@ export default function Contact() {
                     Message Sent!
                   </h4>
                   <p className="text-gray-600">
-                    We'll get back to you within 24 hours.
+                    We&apos;ll get back to you within 24 hours.
                   </p>
                 </motion.div>
               )}
