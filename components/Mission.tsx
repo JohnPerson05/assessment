@@ -1,13 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
 import { FiTarget, FiEye, FiHeart } from 'react-icons/fi'
+import { FadeInUp, PopIn, StaggerContainer, StaggerItem } from '@/components/AnimationWrappers'
 
 export default function Mission() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const values = [
     {
@@ -36,7 +33,6 @@ export default function Mission() {
   return (
     <section
       id="mission"
-      ref={ref}
       className="py-20 bg-gradient-to-br from-dark-900 to-dark-800 relative overflow-hidden"
     >
       {/* Background pattern */}
@@ -49,110 +45,105 @@ export default function Mission() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.span
-            className="inline-block px-4 py-2 bg-primary-500/20 backdrop-blur-md text-primary-300 rounded-full text-sm font-semibold mb-4 border border-primary-500/30"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          >
-            Mission & Vision
-          </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            What <span className="text-primary-400">Drives Us</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Our purpose, vision, and values shape every decision we make
-          </p>
-        </motion.div>
+        <div className="text-center mb-16">
+          <PopIn delay={0.1}>
+            <span className="inline-block px-4 py-2 bg-primary-500/20 backdrop-blur-md text-primary-300 rounded-full text-sm font-semibold mb-4 border border-primary-500/30">
+              Mission & Vision
+            </span>
+          </PopIn>
 
-        {/* Values Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {values.map((value, index) => (
-            <motion.div
-              key={value.title}
-              className="group relative"
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-            >
-              <div className="h-full p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 hover:border-primary-500/50 transition-all hover:bg-white/10 group-hover:-translate-y-2 duration-300">
-                {/* Icon */}
-                <motion.div
-                  className={`w-20 h-20 bg-gradient-to-br ${value.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform`}
-                  whileHover={{ rotate: 5 }}
-                >
-                  {value.icon}
-                </motion.div>
+          <FadeInUp delay={0.2}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              What <span className="text-primary-400">Drives Us</span>
+            </h2>
+          </FadeInUp>
 
-                {/* Content */}
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  {value.title}
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
-
-              {/* Glow effect */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${value.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity -z-10`} />
-            </motion.div>
-          ))}
+          <FadeInUp delay={0.3}>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Our purpose, vision, and values shape every decision we make
+            </p>
+          </FadeInUp>
         </div>
 
+        {/* Values Grid with Stagger */}
+        <StaggerContainer staggerDelay={0.15}>
+          <div className="grid md:grid-cols-3 gap-8">
+            {values.map((value) => (
+              <StaggerItem key={value.title}>
+                <motion.div
+                  className="group relative h-full"
+                  whileHover={{ y: -8 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <div className="h-full p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 hover:border-primary-500/50 smooth-transition hover:bg-white/10 will-animate">
+                    {/* Icon */}
+                    <motion.div
+                      className={`w-20 h-20 bg-gradient-to-br ${value.color} rounded-2xl flex items-center justify-center text-white mb-6`}
+                      whileHover={{ rotate: 5, scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {value.icon}
+                    </motion.div>
+
+                    {/* Content */}
+                    <h3 className="text-2xl font-bold text-white mb-4">
+                      {value.title}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+
+                  {/* Glow effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${value.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-20 smooth-transition -z-10`} />
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerContainer>
+
         {/* Quote section */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-        >
-          <div className="max-w-4xl mx-auto p-12 bg-gradient-to-br from-primary-500/10 to-purple-500/10 backdrop-blur-md rounded-3xl border border-white/10">
-            <div className="text-6xl text-primary-400 mb-6">&quot;</div>
-            <p className="text-2xl md:text-3xl text-white font-light italic mb-6 leading-relaxed">
-              We believe that great teams build great companies. Our mission is
-              to help you find those exceptional people who will shape your
-              future.
-            </p>
-            <div className="text-primary-300 font-semibold">
-              — ATS Leadership Team
+        <PopIn delay={0.5}>
+          <div className="mt-20 text-center">
+            <div className="max-w-4xl mx-auto p-12 bg-gradient-to-br from-primary-500/10 to-purple-500/10 backdrop-blur-md rounded-3xl border border-white/10">
+              <div className="text-6xl text-primary-400 mb-6">&quot;</div>
+              <p className="text-2xl md:text-3xl text-white font-light italic mb-6 leading-relaxed">
+                We believe that great teams build great companies. Our mission is
+                to help you find those exceptional people who will shape your
+                future.
+              </p>
+              <div className="text-primary-300 font-semibold">
+                — ATS Leadership Team
+              </div>
             </div>
           </div>
-        </motion.div>
+        </PopIn>
 
         {/* Stats */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1 }}
-        >
-          {[
-            { value: '2020', label: 'Founded' },
-            { value: '10K+', label: 'Companies Trust Us' },
-            { value: '50+', label: 'Countries' },
-            { value: '99.9%', label: 'Customer Satisfaction' },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="text-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 1.1 + index * 0.1 }}
-            >
-              <div className="text-4xl font-bold text-primary-400 mb-2">
-                {stat.value}
-              </div>
-              <div className="text-gray-400">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+        <StaggerContainer staggerDelay={0.1}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+            {[
+              { value: '2020', label: 'Founded' },
+              { value: '10K+', label: 'Companies Trust Us' },
+              { value: '50+', label: 'Countries' },
+              { value: '99.9%', label: 'Customer Satisfaction' },
+            ].map((stat) => (
+              <StaggerItem key={stat.label}>
+                <motion.div
+                  className="text-center"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="text-4xl font-bold text-primary-400 mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-gray-400">{stat.label}</div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerContainer>
       </div>
     </section>
   )
 }
-

@@ -24,16 +24,32 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance optimization for animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -42,9 +58,9 @@ body {
   }
 }
 
-/* Custom scrollbar */
+/* Enhanced custom scrollbar with gradient */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -52,12 +68,21 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0ea5e9;
-  border-radius: 5px;
+  background: linear-gradient(180deg, #0ea5e9 0%, #06b6d4 100%);
+  border-radius: 6px;
+  border: 2px solid #1e293b;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: linear-gradient(180deg, #0284c7 0%, #0891b2 100%);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: #0ea5e9 #1e293b;
+  scrollbar-width: thin;
 }
 
 /* Gradient text */
@@ -75,3 +100,146 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Add animation keyframes for scroll elements */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float-up {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* New cinematic animation keyframes for premium scroll effects */
+@keyframes cinematic-fade {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+@keyframes float-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slide-fade {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+.animate-float {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+.animate-cinematic-fade {
+  animation: cinematic-fade 3s ease-in-out infinite;
+}
+
+.animate-float-in {
+  animation: float-in 0.8s ease-out;
+}
+
+.animate-slide-fade {
+  animation: slide-fade 0.6s ease-out;
+}
+
+/* Performance hints for animated elements */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* Smooth transitions */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Cinematic zoom effect */
+.zoom-on-scroll {
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Smooth gradient animations */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax container optimization */
+.parallax-container {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* GPU-accelerated transforms */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize images for scroll animations */
+img, video {
+  will-change: transform;
+  transform: translateZ(0);
+}

@@ -1,22 +1,23 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import LoadingAnimation from '@/components/LoadingAnimation'
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import WhatWeDo from '@/components/WhatWeDo'
-import WhyATS from '@/components/WhyATS'
-import Industries from '@/components/Industries'
-import VideoSection from '@/components/VideoSection'
-import TechInAction from '@/components/TechInAction'
-import Journey from '@/components/Journey'
-import Mission from '@/components/Mission'
-import Leadership from '@/components/Leadership'
-import Testimonials from '@/components/Testimonials'
-import FAQ from '@/components/FAQ'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
+import { useState, useEffect } from "react"
+import LoadingAnimation from "@/components/LoadingAnimation"
+import ScrollProgress from "@/components/ScrollProgress"
+import Navbar from "@/components/Navbar"
+import Hero from "@/components/Hero"
+import About from "@/components/About"
+import WhatWeDo from "@/components/WhatWeDo"
+import WhyATS from "@/components/WhyATS"
+import Industries from "@/components/Industries"
+import VideoSection from "@/components/VideoSection"
+import TechInAction from "@/components/TechInAction"
+import Journey from "@/components/Journey"
+import Mission from "@/components/Mission"
+import Leadership from "@/components/Leadership"
+import Testimonials from "@/components/Testimonials"
+import FAQ from "@/components/FAQ"
+import Contact from "@/components/Contact"
+import Footer from "@/components/Footer"
 
 export default function Home() {
   const [loading, setLoading] = useState(true)
@@ -36,6 +37,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
+      <ScrollProgress />
       <Navbar />
       <Hero />
       <About />
@@ -54,4 +56,3 @@ export default function Home() {
     </main>
   )
 }
-

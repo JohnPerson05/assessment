@@ -7,14 +7,14 @@
 ## Installation Steps
 
 1. **Install Dependencies**
-```bash
+\`\`\`bash
 npm install
-```
+\`\`\`
 
 2. **Run Development Server**
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 3. **Open in Browser**
 Navigate to [http://localhost:3000](http://localhost:3000)
@@ -59,7 +59,7 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## File Structure
 
-```
+\`\`\`
 ├── app/
 │   ├── layout.tsx       # Root layout
 │   ├── page.tsx         # Main page (imports all sections)
@@ -68,20 +68,20 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 ├── package.json         # Dependencies
 ├── tailwind.config.js   # Tailwind configuration
 └── next.config.js       # Next.js configuration
-```
+\`\`\`
 
 ## Customization Tips
 
 ### Change Colors
 Edit `tailwind.config.js`:
-```javascript
+\`\`\`javascript
 colors: {
   primary: {
     500: '#YOUR_COLOR',
     // ... other shades
   }
 }
-```
+\`\`\`
 
 ### Update Content
 Each component file contains its own content. Simply edit the text, images, or data arrays in:
@@ -96,10 +96,10 @@ Replace placeholder emojis and gradients with:
 
 ## Production Build
 
-```bash
+\`\`\`bash
 npm run build
 npm start
-```
+\`\`\`
 
 ## Deploy to Vercel
 
@@ -110,15 +110,15 @@ npm start
 ## Troubleshooting
 
 **Port already in use?**
-```bash
+\`\`\`bash
 npm run dev -- -p 3001
-```
+\`\`\`
 
 **Dependencies issue?**
-```bash
+\`\`\`bash
 rm -rf node_modules package-lock.json
 npm install
-```
+\`\`\`
 
 ## Next Steps
 
@@ -144,4 +144,3 @@ For questions or issues, refer to:
 **Responsive:** ✅
 **Animated:** ✅
 **Production Ready:** ✅
-

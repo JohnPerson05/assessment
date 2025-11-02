@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'ATS - Applicant Tracking System',
   description: 'Transform your hiring process with our AI-powered Applicant Tracking System',
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -20,4 +21,3 @@ export default function RootLayout({
     </html>
   )
 }
-

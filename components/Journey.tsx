@@ -1,12 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { FadeInUp, PopIn, SlideInLeft, SlideInRight } from '@/components/AnimationWrappers'
 
 export default function Journey() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const steps = [
     {
@@ -44,92 +41,99 @@ export default function Journey() {
   ]
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.span
-            className="inline-block px-4 py-2 bg-primary-100 text-primary-600 rounded-full text-sm font-semibold mb-4"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          >
-            Your Journey
-          </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-dark-900 mb-6">
-            Journey with <span className="text-primary-500">ATS</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From setup to success, we&apos;re with you every step of the way
-          </p>
-        </motion.div>
+        <div className="text-center mb-16">
+          <PopIn delay={0.1}>
+            <span className="inline-block px-4 py-2 bg-primary-100 text-primary-600 rounded-full text-sm font-semibold mb-4">
+              Your Journey
+            </span>
+          </PopIn>
+
+          <FadeInUp delay={0.2}>
+            <h2 className="text-4xl md:text-5xl font-bold text-dark-900 mb-6">
+              Journey with <span className="text-primary-500">ATS</span>
+            </h2>
+          </FadeInUp>
+
+          <FadeInUp delay={0.3}>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              From setup to success, we&apos;re with you every step of the way
+            </p>
+          </FadeInUp>
+        </div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Center line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 via-purple-500 to-green-500 transform -translate-x-1/2" />
+          <motion.div 
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 via-purple-500 to-green-500 transform -translate-x-1/2"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ transformOrigin: "top" }}
+          />
 
           <div className="space-y-12">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.phase}
-                className={`flex flex-col md:flex-row items-center gap-8 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-              >
-                {/* Content */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                  <div className={`inline-block ${index % 2 === 0 ? 'md:float-right' : ''}`}>
-                    <span className="inline-block px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm font-semibold mb-3">
-                      {step.phase}
-                    </span>
-                    <h3 className="text-2xl font-bold text-dark-900 mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-600 max-w-md">
-                      {step.description}
-                    </p>
+            {steps.map((step, index) => {
+              const AnimationWrapper = index % 2 === 0 ? SlideInLeft : SlideInRight
+              return (
+                <AnimationWrapper key={step.phase} delay={0.15 * index}>
+                  <div className={`flex flex-col md:flex-row items-center gap-8 ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}>
+                    {/* Content */}
+                    <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                      <div className={`inline-block ${index % 2 === 0 ? 'md:float-right' : ''}`}>
+                        <span className="inline-block px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm font-semibold mb-3">
+                          {step.phase}
+                        </span>
+                        <h3 className="text-2xl font-bold text-dark-900 mb-3">
+                          {step.title}
+                        </h3>
+                        <p className="text-gray-600 max-w-md">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Icon */}
+                    <div className="relative z-10 flex-shrink-0">
+                      <motion.div
+                        className={`w-24 h-24 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center text-4xl shadow-xl will-animate`}
+                        whileHover={{ scale: 1.15, rotate: 10 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
+                      >
+                        {step.icon}
+                      </motion.div>
+                    </div>
+
+                    {/* Spacer */}
+                    <div className="flex-1 hidden md:block" />
                   </div>
-                </div>
-
-                {/* Icon */}
-                <div className="relative z-10 flex-shrink-0">
-                  <motion.div
-                    className={`w-24 h-24 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center text-4xl shadow-xl`}
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                  >
-                    {step.icon}
-                  </motion.div>
-                </div>
-
-                {/* Spacer */}
-                <div className="flex-1 hidden md:block" />
-              </motion.div>
-            ))}
+                </AnimationWrapper>
+              )
+            })}
           </div>
         </div>
 
         {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1 }}
-        >
-          <button className="px-8 py-4 bg-gradient-to-r from-primary-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-xl transition-all hover:scale-105">
-            Start Your Journey Today
-          </button>
-        </motion.div>
+        <PopIn delay={0.7}>
+          <div className="text-center mt-16">
+            <motion.button
+              className="px-8 py-4 bg-gradient-to-r from-primary-500 to-purple-600 text-white rounded-full font-semibold shadow-xl"
+              whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(139, 92, 246, 0.4)" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Start Your Journey Today
+            </motion.button>
+          </div>
+        </PopIn>
       </div>
     </section>
   )
 }
-
