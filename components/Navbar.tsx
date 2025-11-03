@@ -21,7 +21,7 @@ export default function Navbar() {
     { name: 'About', href: '#about' },
     { name: 'Features', href: '#features' },
     { name: 'Industries', href: '#industries' },
-    { name: 'Mission', href: '#mission' },
+    { name: 'Mission', href: '/mission' },
     { name: 'Team', href: '#team' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'FAQ', href: '#faq' },
